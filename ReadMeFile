@@ -1,0 +1,233 @@
+
+QuickBite Data Analyst Assessment
+
+Project Intro
+
+This project was done by me as part of the Data Analyst assessment.
+The dataset contains information about food orders, customers, restaurants, delivery partners, areas, and customer feedback.
+My main aim of this project was to clean the data,combine the tables, and find useful information from the order data using Python and Pandas.
+
+Tools Used in this project :
+
+* Python
+* Pandas
+* Excel
+* VS Code
+
+1.Data Cleaning
+
+The dataset contained six tables.Each table had more issues that needed to be checked and cleaned before using the data for analysis.
+
+Orders Table
+
+* Some date and time values were stored in different formats.
+* The order amount column contained currency symbols and commas.
+* Payment mode and order status values had extra spaces and inconsistent text.
+* Delivery time values contained text such as "mins" and "m".
+* I converted the date and time values into a proper format and removed unwanted characters from the amount and delivery time columns.
+* Text values were cleaned to make them consistent.
+* Missing delivery time values were kept as missing instead of filling them with incorrect values.
+
+Customers Table
+
+* Some customer records were repeated.
+* Customer names had extra spaces.
+* Phone numbers contained characters such as spaces, hyphens, and the country code.
+* Email values were not in a consistent format.
+* I removed exact duplicate rows and cleaned the names, phone numbers, and email values.
+* Phone numbers were kept as text because they are not used for calculations.
+
+Areas Table
+
+* Some city names were written in different ways.
+* For example, short forms and full city names were used in the same column.
+* I changed the city names into a common format so that the same city would not appear under different names during analysis.
+* The area and zone details were retained for combining the tables.
+
+Restaurants Table
+
+* Cusine names had extra spaces and different letter formats.
+* Some rating values needed to be checked.
+* The onboard date column contained date values in different formats.
+* I cleaned the cuisine names, checked the rating values, and converted the onboard dates into a proper date format.
+* Missing values were not filled with random data.
+
+Delivery Partners Table
+
+* Some partner records were repeated.
+* Vehicle names were written in different ways.
+* The join date column needed to be converted into a proper date format.
+* I removed exact duplicate rows and cleaned the text values.
+* Phone numbers were kept as text.
+* I checked the vehicle types before using them for vehicle performance analysis.
+
+Feedback Table
+
+* Some comments contained extra spaces and unwanted blank characters.
+* The feedback date values were not in a consistent format.
+* Rating values needed to be checked.
+* I cleaned the comments, converted the feedback dates, and checked that the ratings were within the expected range.
+* Empty comments and missing ratings were kept as missing values.
+
+2.Combining the Tables
+
+After cleaning the six tables, I combined them into one dataset for analysis.
+
+The orders table was used as the main table because it contains the order details.
+
+I used the following columns to connect the tables:
+
+* Customer ID
+* Restaurant ID
+* Area ID
+* Partner ID
+* Order ID
+
+The customer name was added from the customers table.
+
+Restaurant name and cuisine were added from the restaurants table. The restaurant's area ID was then used to get the area name and city from the areas table.
+
+Delivery partner name and vehicle type were added using the partner ID.
+
+Customer feedback was added using the order ID.
+
+I also created some new columns from the order date and time:
+
+* Order Date
+* Order Time
+* Order Day
+* Is Late
+
+An order was marked as late when the delivery time was more than 45 minutes. If the delivery time was missing, the late status was also kept as missing.
+
+Issues Faced While Combining
+
+* I got a NameError because the DataFrame name was different in the cleaning script. I checked the variable names and used the correct one.
+* I got a KeyError when trying to select columns that had not been created yet. I created the required columns before selecting them.
+* I got an error because the os module was not imported. I added the required import.
+* I faced a PermissionError while saving the Excel file because it was open. I closed the file and ran the script again.
+
+After combining, I selected the required 19 columns and saved the final dataset.
+
+3.Data Analysis
+
+For the analysis, I used only the combined dataset.
+I selected delivered orders for the performance calculations because cancelled orders should not be included in delivery performance.
+
+Area Performance
+
+The purpose of this analysis was to compare the performance of different areas.
+
+I calculated:
+
+* Total orders
+* Total revenue
+* Average delivery time
+* Number of late orders
+* Late delivery percentage
+
+The results help to identify areas with higher revenue and areas where delivery time needs improvement.
+
+Top Cuisine by Day
+
+This analysis was done to find which cuisine received the highest number of delivered orders on each day.
+
+I grouped the data by order day and cuisine.
+
+Then I counted the orders for each cuisine and calculated its percentage of the total orders for that day.
+
+Finally, I selected the cuisine with the highest order count for each day.
+
+This helps to understand which cuisines are popular on different days.
+
+Vehicle Performance
+
+This analysis was used to compare delivery performance based on vehicle type.
+
+I calculated:
+
+* Total delivered orders
+* Average delivery time
+* Number of late orders
+* Late delivery percentage
+
+The results help to compare delivery times across different vehicle types.
+
+4. Output Files
+
+The project contains the following output files:
+
+* cleaned_data/Quick_Bite_Data_Cleaning.xlsx – contains the six cleaned tables.
+* cleaned_data/Quick_Bite_Combined_Data.xlsx – contains the combined dataset with 19 columns.
+* analysis/Quick_Bite_Analysis.xlsx – contains the three analysis sheets:
+
+5. How to Run the Project
+
+1. Open the project folder in VS Code.
+2. Make sure Python and the required libraries are installed.
+3. Run the cleaning script first.
+
+python scripts/cleaning.py
+4. After the cleaning file is created, run the analysis script.
+python scripts/analysis.py
+
+
+5. The output Excel files will be saved in the cleaned_data and analysis folders.
+
+My learning jorney
+
+This project gave me practical experience in working with a real-world style dataset.
+
+I worked on cleaning different tables, handling missing values, fixing inconsistent data, and combining tables using common IDs.
+
+I also used Pandas to calculate performance metrics and prepare the results in Excel.
+
+The project helped me understand how data cleaning and analysis are connected and why clean data is important before making conclusions.
+
+
+
+
+
+
+
+How to run :
+
+Step 1: Install the Required Libraries
+Make sure Python is installed on your computer.
+
+in the terminal in VS Code and install the required libraries:
+
+pip install pandas openpyxl
+
+Step 2: Run the Data Cleaning Script
+First, run the cleaning script to clean the six tables in the original Excel dataset.
+
+python scripts/cleaning.py
+
+After running the script, the cleaned Excel file will be saved in the cleaned_data folder.
+
+Step 3: Run the Analysis Script
+
+Once the cleaning process is completed, run the analysis script.
+
+python scripts/analysis.py
+
+This script reads the combined dataset and performs the required analysis.
+
+Step 4: Check the Output Files
+
+After running the scripts, check the following folders:
+
+cleaned_data – contains the cleaned tables and combined dataset.
+
+analysis – contains the final analysis results.
+
+The analysis Excel file contains the following sheets:
+
+Area Performance
+
+Top Cuisine by Day
+
+Vehicle Performance
+
+Make sure the original dataset is available inside the Dataset folder before running the cleaning script.
